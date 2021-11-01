@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Link {
+  id                Int         @id @default(autoincrement())
+  createdAt         DateTime    @default(now())
+  title             String
+  description       String?      
+  url               String      
+  
+  postedBy          User?       @relation("Posts", fields: [postedById], references: [id])
+  postedById        Int?        
+  
+  lastUpdatedAt     DateTime?    @updatedAt // Automatically stores the time when a record was last updated
+  lastUpdatedBy     User?       @relation("LastUpdates", fields: [lastUpdatedById], references: [id])
+  lastUpdatedById   Int?        
+}
+
+model User {
+  id                Int         @id @default(autoincrement())
+  name              String
+  email             String      @unique
+  password          String      
+
+  links             Link[]      @relation("Posts")
+  lastUpdates       Link[]      @relation("LastUpdates")
+}

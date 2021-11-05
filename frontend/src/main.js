@@ -7,6 +7,7 @@ import { onError } from 'apollo-link-error';
 // import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import VueApollo from 'vue-apollo';
+import vuetify from './plugins/vuetify'
 // import { ApolloProvider } from 'vue-apollo';
 // import { createProvider } from './vue-apollo';
 
@@ -56,5 +57,6 @@ const apolloProvider = new VueApollo({
 new Vue({
   el: '#app',
   apolloProvider,
+  vuetify,
   render: (h) => h(App)
 });

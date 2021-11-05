@@ -1,6 +1,11 @@
 <template>
   <div :key="link.id">
-    <h3>{{ link.title }}</h3>
+    <a 
+      :href="'https://' + link.url"
+      target="_blank"
+    >
+      {{link.title}}
+    </a>
   </div>
 </template>
 
@@ -10,3 +15,6 @@ export default {
   props: ["link"]
 };
 </script>
+
+<a href="https://www.facebook.com">Facebook</a>
+<a href="localhost8080/www.facebook.com">Facebook</a>

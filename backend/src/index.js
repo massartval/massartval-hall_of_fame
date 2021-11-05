@@ -12,6 +12,10 @@ const Link = require('./resolvers/Link');
 const prisma = new PrismaClient();
 
 const server = new ApolloServer({
+  /*cors: {
+		origin: '*', // allow request from all domains
+		credentials: true // enable CORS response for requests with credentials (cookies, http authentication)
+  },	*/
   typeDefs: fs.readFileSync(path.join(__dirname, 'schema.graphql'), 'utf8'),
   resolvers: {
     Query,

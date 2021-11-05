@@ -13,7 +13,9 @@
     "@prisma/client": "^3.3.0",
     "apollo-server": "^3.4.0",
     "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^8.5.1"
+    "cors": "^2.8.5",
+    "jsonwebtoken": "^8.5.1",
+    "vue-apollo": "^3.0.8"
   },
   "devDependencies": {
     "prisma": "^3.3.0"

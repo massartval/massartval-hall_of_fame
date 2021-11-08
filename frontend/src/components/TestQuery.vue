@@ -7,7 +7,9 @@
           <input type="text" v-model="inputId" placeholder="Test query - enter link id">
         </v-form>
         <div v-if="inputId && getLink /* Fix Vue render errors in console */">
-          {{ getLink.url + ` - ` + getLink.id }}
+          <h3>{{ getLink.title }}</h3>
+          <p>{{ getLink.description }}</p>
+          <p>{{ getLink.url + ` - id: ` + getLink.id }}</p>
         </div>
       </v-col>
     </v-row>
@@ -21,6 +23,7 @@ const GET_LINK = gql `
 query($getLinkId: ID!){
   getLink(id: $getLinkId) {
     id
+    title
     description
     url
   }

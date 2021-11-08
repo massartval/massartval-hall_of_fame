@@ -48,6 +48,7 @@ const postLink = async (parent, args, context, info)  => {
   const { userId } = context;
   const newLink = await context.prisma.link.create({
     data: {
+      title: args.title,
       description: args.description,
       url: args.url,
       // connect the Link to be created with the User who is creating it through a nested write.
@@ -64,6 +65,7 @@ const updateLink = async (parent, args, context, info) => {
       id: +args.id,
     },
     data: {
+      title: args.title,
       description: args.description,
       url: args.url,
       // connect the Link to be updated with the User who is updating it through a nested write.

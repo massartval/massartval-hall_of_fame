@@ -4,13 +4,21 @@
     <v-row class="text-center">
       <v-col cols="12">
         <v-form action="" method="PUT" @submit.prevent="testMutation">
-          <input type="text" v-model="inputId" placeholder="Test mutation - enter link id">
-          <input type="text" v-model="inputDescription" placeholder="Test mutation - enter link description">
-          <input type="text" v-model="inputUrl" placeholder="Test mutation - enter link url">
+          <input type="text" v-model="inputId" placeholder="Test mutation - enter link id"><br>
+          <input type="text" v-model="inputTitle" placeholder="Test mutation - enter link title"><br>
+          <input type="text" v-model="inputDescription" placeholder="Test mutation - enter link description"><br>
+          <input type="text" v-model="inputUrl" placeholder="Test mutation - enter link url"><br>
           <v-btn type="submit">Update Link</v-btn>
         </v-form>
-        <div v-if="inputId && updateLink /* Fix Vue render errors in console */">
-          {{ updateLink.url + ` - ` + updateLink.id }}
+        <div v-if="inputId && updateLink.length /* Fix Vue render errors in console */">
+          <h3>{{ updateLink.title }}</h3>
+          <p>{{ updateLink.description }}</p>
+          <p>{{ updateLink.url + ` - id: ` + updateLink.id }}</p>        
+        </div>
+        <div>
+          <h3>{{ inputTitle }}</h3>
+          <p>{{ inputDescription }}</p>
+          <p>{{ inputUrl + ` - id: ` + inputId }}</p> 
         </div>
       </v-col>
     </v-row>
@@ -21,9 +29,10 @@
 import gql from "graphql-tag";
 
 const TEST_MUTATION = gql `
-mutation($updateLinkId: ID!, $updateLinkDescription2: String, $updateLinkUrl2: String){
-  updateLink(id: $updateLinkId, description: $updateLinkDescription2, url: $updateLinkUrl2) {
+mutation($updateLinkId: ID!, $updateLinkTitle: String!, $updateLinkDescription: String, $updateLinkUrl: String!){
+  updateLink(id: $updateLinkId, title: $updateLinkTitle, description: $updateLinkDescription, url: $updateLinkUrl) {
     id
+    title
     description
     url
   }
@@ -36,6 +45,7 @@ export default {
     return {
       updateLink: [],
       inputId: '',
+      inputTitle: '',
       inputDescription: '',
       inputUrl: '',
     }
@@ -43,14 +53,18 @@ export default {
   methods: {
     testMutation() {
         const id = this.inputId;
+        const title = this.inputTitle;
         const desc = this.inputDescription;
-        const url = this.inputUrl
+        const url = this.inputUrl;
+        //console.log(this.inputId, this.inputTitle, this.inputDescription, this.inputUrl);
+        //console.log(id, title, desc, url);
       this.$apollo.mutate({
         mutation: TEST_MUTATION,
         variables: {
           updateLinkId: id,
-          updateLinkDescription2: desc,
-          updateLinkUrl2: url,
+          updateLinkTitle: title,
+          updateLinkDescription: desc,
+          updateLinkUrl: url,
         }
       })
     }

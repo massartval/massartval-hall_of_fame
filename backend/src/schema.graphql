@@ -8,8 +8,8 @@ type Query {
 }
 
 type Mutation {
-  postLink(description: String!, url: String!): Link!
-  updateLink(id: ID!, description: String, url: String): Link
+  postLink(title: String!, description:String, url: String!): Link!
+  updateLink(id: ID!, title: String!, description: String, url: String!): Link
   deleteLink(id: ID!): Link
 
   # Authentication

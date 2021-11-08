@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <Link v-for="link in getFeed" :key="link.id" :link="link"></Link>
-  </div>
+  <v-container>
+    <v-row class="text-center">
+      <v-col cols="12">
+        <Link v-for="link in getFeed" :key="link.id" :link="link"/>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

@@ -4,10 +4,12 @@ import App from './App.vue';
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { onError } from 'apollo-link-error';
-// import { setContext } from 'apollo-link-context'
+import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import VueApollo from 'vue-apollo';
 import vuetify from './plugins/vuetify'
+import router from './router'
+import store from './store'
 // import { ApolloProvider } from 'vue-apollo';
 // import { createProvider } from './vue-apollo';
 
@@ -27,23 +29,22 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (networkError) console.log(`ERROR:`, <code data-enlighter-language="generic" class="EnlighterJSRAW">[Network error]: ${networkError}</code>);
 });
 
-/*
-const httpLinkAuth = setContext((_, { headers }) => {
-  // get the authentication token from localstorage if it exists
-  //const token = localStorage.getItem('USER_TOKEN')
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTYzNTgwNDczNH0.u9TrMlPbCyQ489apzjwUEVDSISDcz3YKVuNd2RdwpLU";
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('AUTH_TOKEN');
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      Authorization: token ? `Bearer ${token}` : ''
+      authorization: token ? `Bearer ${token}` : "",
     }
   }
-})*/
+});
+
 
 const apolloClient = new ApolloClient({
   // link: httpLinkAuth.concat(httpLink),
-  link: errorLink.concat(httpLink),
+  link: errorLink.concat(authLink.concat(httpLink)),
   cache: new InMemoryCache(),
   connectToDevTools: true
 });
@@ -58,5 +59,7 @@ new Vue({
   el: '#app',
   apolloProvider,
   vuetify,
+  router,
+  store,
   render: (h) => h(App)
 });

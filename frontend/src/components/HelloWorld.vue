@@ -1,42 +1,30 @@
 <template>
   <v-container>
-
     <v-row class="text-center">
       <v-col cols="12">
         <v-img
-          :src="require('../assets/ryanlerch-Decorative-Letter-Set-21.svg')"
+          :src="require('../assets/logo.svg')"
           class="my-3"
           contain
           height="200"
-          alt="V Logo"
         />
       </v-col>
-    </v-row>
 
-    <v-row class="text-center">
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
-          Hall of Fame
+          Welcome to Vuetify
         </h1>
 
         <p class="subheading font-weight-regular">
-          Here you can find my favorite internet things!
-          <br>If you wish to contact me, visit my
+          For help and collaboration with other Vuetify developers,
+          <br>please join our online
           <a
-            href="https://www.linkedin.com/in/massartval/"
+            href="https://community.vuetifyjs.com"
             target="_blank"
-          >LinkedIn</a>
+          >Discord Community</a>
         </p>
       </v-col>
-    </v-row>
 
-    <v-row class="text-center">
-      <v-col class="mb-4">
-        <Feed/>
-      </v-col>
-    </v-row>
-
-    <v-row class="text-center">
       <v-col
         class="mb-5"
         cols="12"
@@ -104,13 +92,8 @@
 </template>
 
 <script>
-  import Feed from './Feed.vue'
-
   export default {
     name: 'HelloWorld',
-    components: {
-      Feed,
-    },
 
     data: () => ({
       ecosystem: [

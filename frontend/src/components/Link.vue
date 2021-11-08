@@ -1,5 +1,5 @@
 <template>
-  <div :key="link.id">
+  <div class="mb-4" :key="link.id">
     <a 
       :href="'https://' + link.url"
       target="_blank"

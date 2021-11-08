@@ -1,6 +1,7 @@
 <template>
   <div>
     <Welcome/>
+    <hr>
     <Feed/>
   </div>
 </template>

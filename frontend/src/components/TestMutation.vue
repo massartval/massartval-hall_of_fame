@@ -11,11 +11,13 @@
           <v-btn type="submit">Update Link</v-btn>
         </v-form>
         <div v-if="inputId && updateLink.length /* Fix Vue render errors in console */">
+          <h2>Response</h2>
           <h3>{{ updateLink.title }}</h3>
           <p>{{ updateLink.description }}</p>
           <p>{{ updateLink.url + ` - id: ` + updateLink.id }}</p>        
         </div>
         <div>
+          <h2>Inputs</h2>
           <h3>{{ inputTitle }}</h3>
           <p>{{ inputDescription }}</p>
           <p>{{ inputUrl + ` - id: ` + inputId }}</p> 

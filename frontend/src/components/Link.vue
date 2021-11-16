@@ -15,6 +15,3 @@ export default {
   props: ["link"]
 };
 </script>
-
-<a href="https://www.facebook.com">Facebook</a>
-<a href="localhost8080/www.facebook.com">Facebook</a>

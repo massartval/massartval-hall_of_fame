@@ -6,6 +6,7 @@
     <hr>
     <PostLink/>
     <hr>
+    <UpdateLink/>
     <TestQuery/>
     <TestMutation/>
   </div>
@@ -14,6 +15,7 @@
 <script>
   import LogoutForm from '../components/LogoutForm.vue'
   import PostLink from '../components/PostLink.vue'
+  import UpdateLink from '../components/UpdateLink.vue'
   import TestMutation from '../components/TestMutation.vue'
   import TestQuery from '../components/TestQuery.vue'
   export default {
@@ -22,6 +24,7 @@
     components: {
       LogoutForm,
       PostLink,
+      UpdateLink,
       TestMutation,
       TestQuery,
     },

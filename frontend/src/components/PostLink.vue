@@ -3,12 +3,18 @@
   <v-container>
     <v-row class="text-center">
       <v-col cols="12">
-        <v-form action="" method="POST" @submit.prevent="postLink">
+        <v-form action="" method="POST" @submit.prevent="postLinkMutation">
           <input type="text" v-model="inputTitle" placeholder="Title"><br>
           <input type="text" v-model="inputDescription" placeholder="Description"><br>
           <input type="text" v-model="inputUrl" placeholder="URL"><br>
           <v-btn type="submit">Post Link</v-btn>
         </v-form>
+        <div v-if="postLink.id /* Fix Vue render errors in console */">
+          <h2>Response</h2>
+          <h3>{{ postLink.title }}</h3>
+          <p>{{ postLink.description }}</p>
+          <p>{{ postLink.url + ` - id: ` + postLink.id }}</p>        
+        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -32,19 +38,17 @@ export default {
   name: 'PostLink',
   data() {
     return {
-      postLink: [],
+      postLink: {},
       inputTitle: '',
       inputDescription: '',
       inputUrl: '',
     }
   }, 
   methods: {
-    testMutation() {
+    postLinkMutation() {
         const title = this.inputTitle;
         const desc = this.inputDescription;
         const url = this.inputUrl;
-        //console.log(this.inputId, this.inputTitle, this.inputDescription, this.inputUrl);
-        //console.log(id, title, desc, url);
       this.$apollo.mutate({
         mutation: POST_LINK,
         variables: {
@@ -52,6 +56,8 @@ export default {
           postLinkDescription: desc,
           postLinkUrl: url,
         }
+      }).then((response) => {
+        this.postLink = response.data.postLink;
       })
     }
   }

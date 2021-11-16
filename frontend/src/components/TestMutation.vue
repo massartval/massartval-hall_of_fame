@@ -10,18 +10,18 @@
           <input type="text" v-model="inputUrl" placeholder="Test mutation - enter link url"><br>
           <v-btn type="submit">Update Link</v-btn>
         </v-form>
-        <div v-if="inputId && updateLink.length /* Fix Vue render errors in console */">
+        <div v-if="updateLink.id /* Fix Vue render errors in console */">
           <h2>Response</h2>
           <h3>{{ updateLink.title }}</h3>
           <p>{{ updateLink.description }}</p>
           <p>{{ updateLink.url + ` - id: ` + updateLink.id }}</p>        
         </div>
-        <div>
+        <!--div>
           <h2>Inputs</h2>
           <h3>{{ inputTitle }}</h3>
           <p>{{ inputDescription }}</p>
           <p>{{ inputUrl + ` - id: ` + inputId }}</p> 
-        </div>
+        </div-->
       </v-col>
     </v-row>
   </v-container>
@@ -45,7 +45,7 @@ export default {
   name: 'TestMutation',
   data() {
     return {
-      updateLink: [],
+      updateLink: {},
       inputId: '',
       inputTitle: '',
       inputDescription: '',
@@ -68,6 +68,10 @@ export default {
           updateLinkDescription: desc,
           updateLinkUrl: url,
         }
+      }).then((response) => {
+        console.log(response);
+        this.updateLink = response.data.updateLink;
+        console.log(this.updateLink);
       })
     }
   }
